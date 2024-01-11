@@ -26,6 +26,8 @@ Arduino Uno
 
 #define ADXL345_DEVICE (0x53)    // Device Address for ADXL345
 #define ADXL345_TO_READ (6)      // Number of Bytes Read - Two Bytes Per Axis
+#define SDA_PIN 4   //引脚接法在这里
+#define SCL_PIN 5
 
 ADXL345::ADXL345() {
 	status = ADXL345_OK;
@@ -54,7 +56,7 @@ ADXL345::ADXL345(int CS) {
 
 void ADXL345::powerOn() {
 	if(I2C) {
-		Wire.begin();				// If in I2C Mode Only
+		 Wire.begin(SDA_PIN, SCL_PIN);				// If in I2C Mode Only
 	}
 	//ADXL345 TURN ON
 	writeTo(ADXL345_POWER_CTL, 0);	// Wakeup
